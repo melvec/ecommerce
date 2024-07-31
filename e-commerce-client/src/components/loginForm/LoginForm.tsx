@@ -1,18 +1,20 @@
 import { FormEvent } from "react";
 import { loginUser } from "../../axios/userAxios";
 import useForm from "../../hooks/useForm";
+import CustomInput from "../CustomInput/CustomInput";
 
 const initialFormData = {
   email: "",
   password: "",
 };
 
-interface LoginFormProps {
+export interface LoginFormProps {
   toggleAuthMode: () => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ toggleAuthMode }) => {
   const { formData, handleOnChange } = useForm(initialFormData);
+  const { email, password } = formData;
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,15 +25,21 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleAuthMode }) => {
   return (
     <form onSubmit={handleOnSubmit}>
       <div className="py-4">
-        <input
-          onChange={handleOnChange}
-          type="text"
-          className="w-full  pl-2 py-4 px-4 h-12 border border-gray-300 rounded-md placeholder: font-light placeholder:text-gray-500"
-          name="email"
-          placeholder="Enter your email"
-          required
+        <CustomInput
+          label="Email"
+          handleOnChange={handleOnChange}
+          inputAttributes={{
+            type: "email",
+            name: "email",
+            value: email,
+            placeholder: "Enter your Email",
+            required: true,
+          }}
         />
         <div className="py-4">
+          <div className="pb-2">
+            <span>Password</span>
+          </div>
           <input
             onChange={handleOnChange}
             type="Enter your password"

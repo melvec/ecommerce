@@ -1,7 +1,11 @@
-import React from "react";
+import { LoginFormProps } from "../loginForm/LoginForm";
 
-const SignupForm = () => {
-  return <div>SignupForm</div>;
+const SignupForm: React.FC<LoginFormProps> = ({ toggleAuthMode }) => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle login logic here
+  };
+  return <form onSubmit={handleOnSubmit}></form>;
 };
 
 export default SignupForm;
