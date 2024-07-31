@@ -1,24 +1,40 @@
 import { FormEvent } from "react";
+import { loginUser } from "../../axios/userAxios";
+import useForm from "../../hooks/useForm";
 
-const LoginForm: React.FC = () => {
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+const initialFormData = {
+  email: "",
+  password: "",
+};
+
+interface LoginFormProps {
+  toggleAuthMode: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ toggleAuthMode }) => {
+  const { formData, handleOnChange } = useForm(initialFormData);
+
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("Form Data:", formData);
+    const result = await loginUser(formData);
+    console.log(result);
   };
   return (
     <form onSubmit={handleOnSubmit}>
       <div className="py-4">
-        <span className="mb-2 text-md">Email</span>
         <input
+          onChange={handleOnChange}
           type="text"
           className="w-full  pl-2 py-4 px-4 h-12 border border-gray-300 rounded-md placeholder: font-light placeholder:text-gray-500"
           name="email"
-          placeholder="email"
+          placeholder="Enter your email"
           required
         />
         <div className="py-4">
-          <span className="mb-2 text-md">Password</span>
           <input
-            type="password"
+            onChange={handleOnChange}
+            type="Enter your password"
             className="w-full pl-2 py-4 px-4 h-12 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"
             name="password"
             placeholder="password"
@@ -33,7 +49,12 @@ const LoginForm: React.FC = () => {
         </button>
         <div className="text-center text-gray-400">
           Dont have an account?
-          <span className="font-bold text-black"> Sign up for free</span>
+          <span
+            className="font-bold text-black cursor-pointer "
+            onClick={toggleAuthMode}
+          >
+            Sign up for free
+          </span>
         </div>
       </div>
     </form>

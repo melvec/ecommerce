@@ -5,6 +5,10 @@
   "main": "server.js",
   "author": "melvec",
   "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.4.0",

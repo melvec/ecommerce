@@ -1,7 +1,15 @@
+import { useState } from "react";
 import beachLandcape from "../../assets/beachlandscape.jpg";
 import LoginForm from "../../components/loginForm/LoginForm";
+import SignupForm from "../../components/SignupForm/SignupForm";
 
 const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
+  const toggleAuthMode = () => {
+    setIsLogin((prevIsLogin) => !prevIsLogin);
+  };
+
   return (
     <>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -13,7 +21,11 @@ const AuthPage = () => {
             <span className=" text-center font-bold text-align-center text-green-450 mb-8">
               E-COMMERCE WEBSITE
             </span>
-            <LoginForm />
+            {isLogin ? (
+              <LoginForm toggleAuthMode={toggleAuthMode} />
+            ) : (
+              <SignupForm toggleAuthMode={toggleAuthMode} />
+            )}
           </div>
           <div className="relative flex items-center justify-center">
             <img
