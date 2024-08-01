@@ -29,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleAuthMode }) => {
           label="Email"
           handleOnChange={handleOnChange}
           inputAttributes={{
-            type: "email",
+            type: "text",
             name: "email",
             value: email,
             placeholder: "Enter your Email",
@@ -37,16 +37,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ toggleAuthMode }) => {
           }}
         />
         <div className="py-4">
-          <div className="pb-2">
-            <span>Password</span>
-          </div>
-          <input
-            onChange={handleOnChange}
-            type="Enter your password"
-            className="w-full pl-2 py-4 px-4 h-12 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"
-            name="password"
-            placeholder="password"
-            required
+          <CustomInput
+            label="Password"
+            handleOnChange={handleOnChange}
+            inputAttributes={{
+              type: "password",
+              name: "password",
+              value: password,
+              placeholder: "Enter your password",
+              required: true,
+            }}
           />
         </div>
         <div className="flex justify-end w-full py-4">
